@@ -135,3 +135,8 @@ for i in range(num_images):
 
 plt.tight_layout()
 plt.show()
+
+# Simpan model ke file
+model_save_path = "trained_model.pth"
+torch.save(model.state_dict(), model_save_path)
+print(f"Model telah disimpan ke {model_save_path}")

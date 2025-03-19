@@ -46,6 +46,32 @@ class ImageTensorDataset(Dataset):
     def __getitem__(self, idx):
         return self.image_tensors[idx], self.labels[idx]
 
+
+# **Fungsi untuk Transformasi Gambar**
+def transform_image(image_path):
+    """
+    Fungsi untuk melakukan transformasi gambar agar sesuai dengan model ANN.
+
+    Args:
+        image_path (str): Path menuju gambar yang akan diproses.
+
+    Returns:
+        torch.Tensor: Tensor gambar yang sudah di-preprocess.
+    """
+
+    # **Transformasi yang diterapkan pada gambar**
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),  # Resize gambar ke 224x224
+        transforms.ToTensor(),  # Konversi ke tensor PyTorch
+        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])  # Normalisasi -1 ke 1
+    ])
+
+    # **Membuka gambar menggunakan PIL**
+    image = Image.open(image_path).convert("RGB")  # Pastikan gambar dalam format RGB
+    image_tensor = transform(image).unsqueeze(0)  # Tambahkan batch dimension
+
+    return image_tensor
+
 def show_rgb_image(image_tensor):
     """
     Menampilkan satu gambar dalam warna RGB normal.

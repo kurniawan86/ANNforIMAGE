@@ -40,7 +40,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9 if optimiz
 
 # **TRAINING MODEL**
 model.train()
-epochs = 100
+epochs = 200
 training_errors = []
 for epoch in range(epochs):
     total_loss = 0
